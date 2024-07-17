@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -29,5 +32,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
+      - name: Run all tests
         run: npm test
+
+      - name: Run failure tests
+        run: npm run test:failures  # Exécutez une commande dédiée pour les tests d'échec
