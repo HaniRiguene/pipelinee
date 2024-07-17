@@ -36,4 +36,4 @@ jobs:
         run: npm test
 
       - name: Run failure tests
-        run: npm run test:failures  # Exécutez une commande dédiée pour les tests d'échec
+        run: npm run test:failures || exit 1  # Exit with code 1 if failure tests fail
