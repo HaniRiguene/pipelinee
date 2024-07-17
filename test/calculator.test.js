@@ -3,6 +3,14 @@
 (async () => {
     const { expect } = await import('chai');
     const { add, subtract, multiply, divide } = await import('../calculator.js');
+    describe('divide', function() {
+        it('should throw an error when dividing by zero', function() {
+            expect(() => divide(6, 0)).to.throw('Division by zero is not allowed.');
+        });
+    
+        // Ajoutez d'autres tests d'échec ici selon vos besoins
+    });
+    
   
     describe('Calculator', function() {
         describe('add', function() {
