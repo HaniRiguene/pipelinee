@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "mocha --exit --recursive",
-   "test:failures": "mocha --exit --recursive --grep 'failure'"
+    "test:failures": "mocha --exit --recursive --grep 'failure'"
   },
   "author": "",
   "license": "ISC",

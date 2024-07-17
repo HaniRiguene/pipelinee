@@ -1,46 +1,50 @@
 // index.js
 
-const readline = require('readline');
+const express = require('express');
+const app = express();
 const { add, subtract, multiply, divide } = require('./calculator');
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
+// Middleware pour parser les données POST
+app.use(express.urlencoded({ extended: true }));
+
+// Route pour servir l'interface web
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
 });
 
-rl.question('Enter the first number: ', (num1) => {
-    rl.question('Enter the second number: ', (num2) => {
-        rl.question('Enter the operation (+, -, *, /): ', (operation) => {
-            const a = parseFloat(num1);
-            const b = parseFloat(num2);
+// Route pour gérer les calculs depuis l'interface web
+app.post('/calculate', (req, res) => {
+    const { num1, num2, operation } = req.body;
+    const a = parseFloat(num1);
+    const b = parseFloat(num2);
 
-            let result;
-            try {
-                switch (operation) {
-                    case '+':
-                        result = add(a, b);
-                        break;
-                    case '-':
-                        result = subtract(a, b);
-                        break;
-                    case '*':
-                        result = multiply(a, b);
-                        break;
-                    case '/':
-                        result = divide(a, b);
-                        break;
-                    default:
-                        console.log('Invalid operation');
-                        rl.close();
-                        return;
-                }
+    let result;
+    try {
+        switch (operation) {
+            case '+':
+                result = add(a, b);
+                break;
+            case '-':
+                result = subtract(a, b);
+                break;
+            case '*':
+                result = multiply(a, b);
+                break;
+            case '/':
+                result = divide(a, b);
+                break;
+            default:
+                throw new Error('Invalid operation');
+        }
 
-                console.log(`The result is: ${result}`);
-            } catch (error) {
-                console.log(`Error: ${error.message}`);
-            }
+        res.send(`The result is: ${result}`);
+    } catch (error) {
+        res.status(400).send(`Error: ${error.message}`);
+    }
+});
 
-            rl.close();
-        });
-    });
+// Démarrer le serveur sur le port 3000
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
