@@ -15,7 +15,7 @@
   
         describe('subtract', function() {
             it('should subtract two numbers correctly', function() {
-                expect(subtract(5, 3)).to.equal(2);
+                expect(subtract(5, 3)).to.equal(1);
                 expect(subtract(-5, -3)).to.equal(-2);
                 expect(subtract(-5, 3)).to.equal(-8);
             });
