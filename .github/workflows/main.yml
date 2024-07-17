@@ -37,3 +37,16 @@ jobs:
 
       - name: Run failure tests
         run: npm run test:failures || exit 1  # Exit with code 1 if failure tests fail
+
+      - name: Build Docker image
+        run: |
+          docker build -t hani9/pipelinefinal:latest .
+          docker images  # Optional: display Docker images for verification
+
+      - name: Push Docker image to Docker Hub
+        run: |
+          echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u hani9 --password-stdin
+          docker push hani9/pipelinefinal:latest
+
+      # Optional: Add deployment steps here (e.g., deploy to a server/platform)
+
