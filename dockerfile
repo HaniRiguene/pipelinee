@@ -5,7 +5,10 @@ FROM node:latest
 WORKDIR /app
 
 # Copier les fichiers nécessaires à l'intérieur de l'image
-COPY package.json server.js index.html calculator.js /app/
+COPY package.json /app/
+COPY server.js /app/
+COPY index.html /app/
+COPY calculator.js /app/
 
 # Installer les dépendances
 RUN npm install express
