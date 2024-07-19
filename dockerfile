@@ -1,17 +1,17 @@
-# Utilisation de l'image officielle Node.js 16
-FROM node:16
+# Utiliser une image de node.js comme base
+FROM node:latest
 
-# Définition du répertoire de travail dans l'image Docker
+# Créer le répertoire de l'application dans l'image
 WORKDIR /app
 
-# Copie du package.json et du package-lock.json dans le répertoire de travail
-COPY package*.json ./
+# Copier les fichiers nécessaires à l'intérieur de l'image
+COPY package.json server.js index.html script.js styles.css /app/
 
-# Installation des dépendances Node.js
-RUN npm install
+# Installer les dépendances
+RUN npm install express
 
-# Copie du reste des fichiers de l'application dans le répertoire de travail
-COPY . .
+# Exposer le port 3000
+EXPOSE 3000
 
-# Commande par défaut pour démarrer l'application (à adapter selon votre application)
-CMD [ "npm", "start" ]
+# Commande pour démarrer l'application
+CMD ["node", "server.js"]
