@@ -36,7 +36,14 @@ jobs:
         run: npm install express
 
       - name: start the server
-        run: node server.js
+        run: |
+          node server.js &
+
+          sleep 5
+
+          npm test
+
+          kill $(lsof -t -i:3000) || true
 
       - name: Run all tests
         run: npm test
