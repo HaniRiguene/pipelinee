@@ -12,6 +12,7 @@ COPY calculator.js /app/
 
 # Installer les dépendances
 RUN npm install express
+RUN node server.js
 
 # Exposer le port 3000
 EXPOSE 3000
