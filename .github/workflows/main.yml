@@ -53,7 +53,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t hani9/piplinehani:latest .
+          docker build -t hani9/pipeline:latest .
           docker images  # Optional: display Docker images for verification
 
       - name: Log in to Docker Hub
